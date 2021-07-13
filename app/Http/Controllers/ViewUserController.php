@@ -19,4 +19,9 @@ class ViewUserController extends Controller
     {
         return view('login');
     }
+
+    public function prepaidBalanceView()
+    {
+        return View('user.prepaid-balance');
+    }
 }

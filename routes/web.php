@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewUserController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::get('/register', [ViewUserController::class, 'registerView'])->name('regi
 Route::get('/login', [ViewUserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('user.login.process');
 Route::post('/user/create', [UserController::class, 'register'])->name('user.register.process');
+Route::post('/prepaid-balance', [OrderController::class, 'create'])->name('user.prepaid-balance.process');
+Route::get('/prepaid-balance', [ViewUserController::class, 'prepaidBalanceView'])->name('user.prepaid.balance');
 // Route::group(['prefix' => 'user'], function () {
 //     Route::get('first', FirstIndex::class)->name('report.first.index');
 //     // Route::get('second', SecondIndex::class)->name('report.second.index');

@@ -107,4 +107,13 @@ class UserController extends Controller
         Auth::logout(); // menghapus session yang aktif
         return redirect()->route('login');
     }
+
+    public function test() {
+        $variable = "0811294123122";
+        if (preg_match("/(081)[0-9]*$/", $variable)) {
+            dd("berhasil");
+        } else {
+            dd("gagal");
+        }
+    }
 }
