@@ -5,9 +5,9 @@
         <div class="col-md-4 offset-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center">Prepaid Balance</h3>
+                    <h3 class="text-center">Product Page</h3>
                 </div>
-                <form action="{{ route('user.prepaid-balance.process') }}" method="post">
+                <form action="{{ route('user.product-order.process') }}" method="post">
                 @csrf
                     <div class="card-body">
                         @if(session('errors'))
@@ -23,8 +23,9 @@
                                 </ul>
                             </div>
                         @endif
-                        <x-form.input name="Phone Number" id="phone" placeholder="Input Phone Number" />
-                        <x-form.input name="Total" id="total" placeholder="Value" />
+                        <x-form.input name="Produt" id="product" placeholder="Input Product" />
+                        <x-form.input name="Address" id="address" placeholder="Input Address" />
+                        <x-form.input name="Price" id="price" placeholder="Input Price" />
                         
                     </div>
                     <div class="card-footer">

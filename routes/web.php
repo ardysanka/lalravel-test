@@ -26,6 +26,9 @@ Route::post('/login', [UserController::class, 'login'])->name('user.login.proces
 Route::post('/user/create', [UserController::class, 'register'])->name('user.register.process');
 Route::post('/prepaid-balance', [OrderController::class, 'create'])->name('user.prepaid-balance.process');
 Route::get('/prepaid-balance', [ViewUserController::class, 'prepaidBalanceView'])->name('user.prepaid.balance');
+
+Route::post('/product-order', [OrderController::class, 'createProductOrder'])->name('user.product-order.process');
+Route::get('/product-order', [ViewUserController::class, 'productOrderView'])->name('user.prepaid.balance');
 // Route::group(['prefix' => 'user'], function () {
 //     Route::get('first', FirstIndex::class)->name('report.first.index');
 //     // Route::get('second', SecondIndex::class)->name('report.second.index');
