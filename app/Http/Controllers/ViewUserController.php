@@ -24,4 +24,9 @@ class ViewUserController extends Controller
     {
         return View('user.prepaid-balance');
     }
+
+    public function productOrderView()
+    {
+        return View('user.product-order');
+    }
 }
