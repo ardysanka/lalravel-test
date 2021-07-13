@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrder extends Migration
+class CreatePrepaidBalances extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateOrder extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('prepaid_balances', function (Blueprint $table) {
             $table->id();
-            $table->foreignid('user_id')->constrained('users');
-            $table->foreignid('order_status_id')->constrained('order_statuses');
-            $table->unsignedInteger('total');
-            $table->integer('orderable_id');
-            $table->string("orderable_type");
+            $table->string('mobile_number');
+            $table->string('value');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +29,6 @@ class CreateOrder extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('prepaid_balances');
     }
 }

@@ -15,8 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            OrderStatus::class,
-            PaymentType::class
+            OrderStatus::class
         ]);
     }
 }
