@@ -15,7 +15,7 @@
 - rename file .env.example to .env
 - run command "php artisan key:generate" without "
 - make sure you have empty database with database name salt or you can change DB_DATABASE={your_database_name} in .env file
-- run command "php artisan migrate"  without "
+- run command "php artisan migrate --seed"  without "
 - run command "php artisan serve"  without "
 - open new cmd and cd to project
 - run command "php artisan queue:work"   without "
