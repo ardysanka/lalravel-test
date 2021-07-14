@@ -151,14 +151,15 @@ class OrderController extends Controller
                         } else {
                             $xstatus = 1;
                         }
+                    } else {
+                        $xstatus = 3;
                     }
-
                     $order->update([
                         'order_status_id' => $xstatus
                     ]);
                     if ($xstatus == 1) {
                         $status = "failed";
-                    } elseif($xstatus == 3) {
+                    } elseif ($xstatus == 3) {
                         $status = "success";
                     }
                 } elseif ($order->order_status_id == 4) {
