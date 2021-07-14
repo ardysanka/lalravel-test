@@ -7,6 +7,19 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Setting Application For the first time
+- open cmd and cd to folder where you want to install application 
+- git clone https://github.com/ardysanka/lalravel-test.git
+- cd to project(cd lalravel-test)
+- run command "composer install" without "
+- rename file .env.example to .env
+- run command "php artisan key:generate" without "
+- make sure you have empty database with database name salt or you can change DB_DATABASE={your_database_name} in .env file
+- run command "php artisan migrate"  without "
+- run command "php artisan serve"  without "
+- open new cmd and cd to project
+- run command "php artisan queue:work"   without "
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
