@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="col-md-4 offset-md-4">
+
             <div class="card">
                 <div class="card-header">
                     <h3 class="text-center">Register</h3>
@@ -32,6 +31,4 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
 @endsection

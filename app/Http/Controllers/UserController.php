@@ -22,13 +22,13 @@ class UserController extends Controller
                 'password'  => 'required'
             ];
             $messages = [
-                'name.required'     => 'Nama Lengkap wajib diisi',
-                'name.min'          => 'Nama lengkap minimal 3 karakter',
-                'name.max'          => 'Nama lengkap maksimal 35 karakter',
-                'email.required'    => 'Email wajib diisi',
-                'email.email'       => 'Email tidak valid',
-                'email.unique'      => 'Email sudah terdaftar',
-                'password.required' => 'Password wajib diisi',
+                'name.required'     => 'Full Name Required',
+                'name.min'          => 'Full Name minimal 3 karakter',
+                'name.max'          => 'Full Name Maximal 35 karakter',
+                'email.required'    => 'Email Required',
+                'email.email'       => 'Email Invalid',
+                'email.unique'      => 'Email Already Registered',
+                'password.required' => 'Password Required',
             ];
 
             $validator = Validator::make($request->all(), $rules, $messages);
@@ -44,12 +44,17 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
             DB::commit();
-            return "Success";
+            $notifType = 'notifSuccess';
+            $notifMessage = 'Now You Can login';
+            return redirect()->route('login')->with(compact('notifType', 'notifMessage'));
         } catch (\Throwable $th) {
             DB::rollBack();
             // dd($th->getMessage());
-            $this->alert('error', $th->getMessage());
-            return redirect()->back()->withInput();
+            // $this->alert('error', $th->getMessage());
+              $notifType = "notifError";
+            $notifMessage = $th->getMessage();
+             return redirect()->back()->withInput()->with(compact('notifType', 'notifMessage'))
+             ->with([$notifType => $notifMessage]);
         }
     }
 
@@ -59,20 +64,20 @@ class UserController extends Controller
         try {
             $rules = [
                 'email'                 => 'required|email',
-                'password'              => 'required'
+                'password'              => 'required|min:6'
             ];
 
             $messages = [
-                'email.required'        => 'Email wajib diisi',
-                'email.email'           => 'Email tidak valid',
-                'password.required'     => 'Password wajib diisi',
+                'email.required'        => 'Email Required',
+                'email.email'           => 'Email Invalid',
+                'password.required'     => 'Password Required',
+                'password.min'          => 'Password Min 6 Character',
             ];
 
             $validator = Validator::make($request->all(), $rules, $messages);
 
             if ($validator->fails()) {
-                dd("validas");
-                // return redirect()->back()->withErrors($validator)->withInput($request->all);
+                return redirect()->back()->withErrors($validator)->withInput($request->all);
             }
 
             $data = [
@@ -82,23 +87,23 @@ class UserController extends Controller
 
             Auth::attempt($data);
 
-            if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
-                //Login Success
-                // dd("Berhasil");
+            if (Auth::check()) {
                 return redirect()->route('home');
-            } else { // false
-                //Login Fail
-                dd("Gagal");
-                // Session::flash('error', 'Email atau password salah');
-                // return redirect()->route('login');
+            } else {
+                $notifType = 'notifError';
+                $notifMessage = 'Invalid Username Or Password';
+                return redirect()->back()->withInput($request->all)->with(compact('notifType', 'notifMessage'));
             }
             DB::commit();
             return "Success";
         } catch (\Throwable $th) {
             DB::rollBack();
-            // dd($th->getMessage());
-            $this->alert('error', $th->getMessage());
-            return redirect()->back()->withInput();
+            dd($th->getMessage());
+            // $this->alert('error', $th->getMessage());
+              $notifType = "notifError";
+            $notifMessage = $th->getMessage();
+             return redirect()->back()->withInput()->with(compact('notifType', 'notifMessage'))
+             ->with([$notifType => $notifMessage]);
         }
     }
 
